@@ -1,0 +1,13 @@
+html,div,p,span,ul,li{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+a{
+  color: #1ab394;
+}
+.a{
+  color: #1ab394;
+  text-decoration: underline;
+  cursor: pointer;
+}

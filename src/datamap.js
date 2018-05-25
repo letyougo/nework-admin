@@ -1,0 +1,22 @@
+export default {
+  user:{
+    checkStatus:[
+      {
+        status:'0',
+        desc:'未认证'
+      },
+      {
+        status:'1',
+        desc:'未审核'
+      },
+      {
+        status:'-1',
+        desc:'审核未通过'
+      },
+      {
+        status:'2',
+        desc:'已认证'
+      },
+    ]
+  }
+}
