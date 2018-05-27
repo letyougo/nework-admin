@@ -34,7 +34,13 @@
               <el-tag v-else type="danger">否</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="level" label="级别"></el-table-column>
+          <el-table-column label="级别">
+            <template scope="scope">
+              <span v-if="scope.row.level=='n'" type="primary">国家</span>
+              <span v-if="scope.row.level=='p'" type="danger">省/直辖市</span>
+              <span v-if="scope.row.level=='c'" type="danger">城市</span>
+            </template>
+          </el-table-column>
             <el-table-column label="操作">
                 <template scope="scope">
                     <el-button-group size="mini">
@@ -70,15 +76,10 @@
 
       async fetch() {
         var id = this.$route.params.id
-        let res = await request.get(list_url,{params:{parentId:id}})
+        let res = await request.get(list_url,{params:{parentId:id,isDeleted:0}})
         let list = res.data.data
-
-        if(list.length){
-          this.list = res.data.data
-        }else {
-          this.$message.error('数据为空')
-          this.$router.back()
-        }
+        this.list = res.data.data
+      
       },
       async fetch_item(){
         var id = this.$route.params.id
@@ -88,7 +89,14 @@
         }
 
         let res = await request.get(item_url,{params:{districtId:id}})
-        this.item = res.data.data
+        let item = res.data.data
+        this.item = item
+        if(item.level == 'c'){
+          this.$router.back()
+        }
+
+        
+        
       },
       reload(){
         this.fetch()

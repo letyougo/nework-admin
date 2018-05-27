@@ -19,7 +19,7 @@
               <span slot="title">用户管理</span>
             </el-menu-item>
 
-            <el-menu-item index="/service" @click="$router.push('/service')">
+            <el-menu-item index="/service" @click="$router.push('/service/0')">
               <span slot="title">服务管理</span>
             </el-menu-item>
 

@@ -37,7 +37,7 @@ export default new Router({
 
 
     {
-      path: '/service',
+      path: '/service/:id',
       name: 'service-list',
       component: service_list
     },
