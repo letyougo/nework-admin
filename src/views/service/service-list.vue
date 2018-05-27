@@ -131,7 +131,7 @@
     },
      watch:{
       $route(){
-        this.reload()
+        this.fetch()
       }
     }
   }
