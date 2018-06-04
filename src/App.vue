@@ -10,30 +10,52 @@
         </div>
       </div>
       <el-row>
-        <el-col :span="2">
+        <el-col :span="3" >
           <el-menu
             default-active="user"
             class="el-menu-vertical-demo"
           >
-            <el-menu-item index="/user" @click="$router.push('/user')">
-              <span slot="title">用户管理</span>
-            </el-menu-item>
 
-            <el-menu-item index="/service" @click="$router.push('/service/0')">
-              <span slot="title">服务管理</span>
-            </el-menu-item>
+           <el-submenu index="1">
+              <template slot="title">
+  
+                <span>系统管理</span>
+              </template>
+              <el-menu-item-group>
+               
+                <el-menu-item index="/sysuser"  @click="$router.push('/sysuser')">系统用户</el-menu-item>
+                <el-menu-item index="/role" @click="$router.push('/role')">角色管理</el-menu-item>
+                <el-menu-item index="/per" @click="$router.push('/per')">权限管理</el-menu-item>
+              </el-menu-item-group>
+            </el-submenu>
+           
+            <el-submenu index="2">
+              <template slot="title">
+  
+                <span>业务管理</span>
+              </template>
+              <el-menu-item-group>             
+                 <el-menu-item index="/user" @click="$router.push('/user')">
+                    <span slot="title">用户管理</span>
+                </el-menu-item>
 
-            <el-menu-item index="/district" @click="$router.push('/district/0')">
-              <span slot="title">区域管理</span>
-            </el-menu-item>
+                <el-menu-item index="/service" @click="$router.push('/service/0')">
+                  <span slot="title">服务管理</span>
+                </el-menu-item>
 
-            <el-menu-item index="/template" @click="$router.push('/template')">
-              <span slot="title">模板管理</span>
+                <el-menu-item index="/district" @click="$router.push('/district/0')">
+                  <span slot="title">区域管理</span>
+                </el-menu-item>
+
+                <el-menu-item index="/template" @click="$router.push('/template')">
+                  <span slot="title">模板管理</span>
             </el-menu-item>
+              </el-menu-item-group>
+            </el-submenu>
 
           </el-menu>
         </el-col>
-        <el-col :span="22">
+        <el-col :span="21">
           <div class="content">
             <router-view/>
           </div>
@@ -46,85 +68,85 @@
 
 <script>
 export default {
-  name: 'App'
-}
+  name: "App"
+};
 </script>
 
 <style>
-  body,html{
-    width: 100%;
-    height: 100%;
+body,
+html {
+  width: 100%;
+  height: 100%;
+}
+div {
+  margin: 0;
+  padding: 0;
+}
+#app {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  min-width: 1280px;
+}
 
-  }
-  div{
-    margin: 0;
-    padding: 0;
-  }
-  #app {
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    min-width: 1280px;
+.top-bar {
+  background: #1ab394;
 
-  }
+  text-align: center;
+  color: #ffffff;
+  font-size: 30px;
+  text-shadow: 10px 10px 4px 4px rgba(0, 0, 0, 0.8);
+  position: relative;
+  height: 44px;
+}
+.el-submenu .el-menu-item {
+  min-width: inherit;
+}
 
+.right {
+  position: absolute;
+  right: 20px;
 
-
-  .top-bar{
-    background:#1ab394 ;
-
-    text-align: center;
-    color: #ffffff;
-    font-size: 30px;
-    text-shadow: 10px 10px 4px 4px rgba(0,0,0,0.8);
-    position: relative;
-    height: 44px;
-  }
-
-  .right{
-    position: absolute;
-    right: 20px;
-
-    top: 0;
-    bottom: 0;
-    font-size: 14px;
-  }
-  .logout{
-    color: #ffffff;
-    font-size: 25px;
-    display: inline-block;
-    margin-left: 5px;
-    text-decoration: none;
-  }
-  .left{
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    font-size: 14px;
-  }
-  .left a{
-    display: block;
-    height: 44px;
-  }
-  .left span{
-    display: block;
-    line-height: 22px;
-    height: 22px;
-    text-align: left;
-  }
-  .el-menu-item i{
-    color: #ffffff
-  }
-  i{
-    font-size: 16px;
-    color: #ffffff;
-  }
-  .content{
-    padding: 20px;
-    box-sizing: border-box;
-  }
+  top: 0;
+  bottom: 0;
+  font-size: 14px;
+}
+.logout {
+  color: #ffffff;
+  font-size: 25px;
+  display: inline-block;
+  margin-left: 5px;
+  text-decoration: none;
+}
+.left {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  font-size: 14px;
+}
+.left a {
+  display: block;
+  height: 44px;
+}
+.left span {
+  display: block;
+  line-height: 22px;
+  height: 22px;
+  text-align: left;
+}
+.el-menu-item i {
+  color: #ffffff;
+}
+i {
+  font-size: 16px;
+  color: #ffffff;
+}
+.content {
+  padding: 20px;
+  box-sizing: border-box;
+}
 </style>
 

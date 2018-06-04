@@ -10,13 +10,28 @@
                  <el-select placeholder="选择省/州" v-model="filter.p_value" @change="fetch_c">
                   <el-option v-for="item in filter.p_options" :value="item.districtId" :label="item.chinese">{{item.chinese}}</el-option>
                  </el-select>
-                  <el-select placeholder="选择城市" v-model="filter.c_value" @change="fetch">
+                  <el-select placeholder="选择城市" v-model="filter.c_value" @change="fetch(filter.c_value)" >
                        <el-option v-for="item in filter.c_options" :value="item.districtId" :label="item.chinese">{{item.chinese}}</el-option>
                   </el-select>
             </el-form-item>
         </el-form>
 
         <el-table :data="list" size="mini" v-loading="loading">
+             <el-table-column type="expand">
+                <template slot-scope="props">
+                  <el-form  label-width="80px" >
+                    <el-form-item label="名字">
+                      <el-input v-model="props.row.serviceTypeName" size="mini"/>
+                    </el-form-item>
+                    <el-form-item label="权重">
+                      <el-input v-model="props.row.weight" size="mini"/>
+                    </el-form-item>
+                      <el-form-item>
+                        <el-button size="mini" type="primary" @click="update(props.row)" >更新</el-button>
+                      </el-form-item>
+                  </el-form>
+                </template>
+             </el-table-column>
             <el-table-column prop="serviceTypeId" label="id"></el-table-column>
             <el-table-column prop="serviceTypeName" label="类型">
                 <template scope="scope">
@@ -60,6 +75,7 @@
   const detail_url = "/service/getServiceById"
 
   const district_list_url = "/district/listDistrictByParam"
+  const update = '/service/updateService'
   export default {
     name: 'service-list',
     data() {
@@ -96,10 +112,22 @@
         this.filter.c_options = res.data.data
       },
 
-      async fetch() {
+      async update(item){
+      
+        var data = {
+          weight:item.weight,
+          serviceTypeName:item.serviceTypeName,
+          serviceTypeId:parseInt(item.serviceTypeId)
+        }
+      
+        let res = await request.post(update,data)
+        this.fetch('')
+      },
+
+      async fetch(c) {
         this.loading = true 
         let id = this.$route.params.id
-        let res = await request.get(list_url,{params:{parentId:id,isDeleted:false,districtId:this.filter.c_value}})
+        let res = await request.get(list_url,{params:{parentId:id,isDeleted:false,districtId:c}})
         this.loading = false
         this.list = res.data.data
         this.fetch_item()
@@ -121,7 +149,7 @@
       },
     
     reload(){
-        // this.fetch()
+        this.fetch('')
         // 
         this.fetch_n()
       }

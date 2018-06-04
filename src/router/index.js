@@ -12,6 +12,15 @@ import district_item from '../views/district/district-item'
 import template_list from '../views/template/template-list'
 import template_item from '../views/template/template-item'
 
+import sysuser_list from '../views/sysuser/sysuser-list'
+import sysuser_item from '../views/sysuser/sysuser-item'
+
+import role_list from '../views/role/role-list'
+import role_item from '../views/role/role-item'
+
+import per_list from '../views/per/per-list'
+import per_item from '../views/per/per-item'
+
 Vue.use(Router)
 
 export default new Router({
@@ -70,8 +79,41 @@ export default new Router({
       path: '/template_item',
       name: 'template-item',
       component: template_item
-    }
+    },
 
+
+    {
+      path: '/sysuser',
+      name: 'sysuser-list',
+      component: sysuser_list
+    },
+    {
+      path: '/sysuser_item',
+      name: 'sysuser-item',
+      component: sysuser_item
+    },
+
+    {
+      path: '/role',
+      name: 'roles-list',
+      component: role_list
+    },
+    {
+      path: '/role_item',
+      name: 'role-item',
+      component: role_item
+    },
+
+    {
+      path: '/per',
+      name: 'per-list',
+      component: per_list
+    },
+    {
+      path: '/per_item',
+      name: 'per-item',
+      component: per_item
+    },
 
   ]
 })
