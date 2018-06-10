@@ -5,7 +5,7 @@ request.defaults.baseURL = 'http://localhost:8080'
 import vue from 'vue'
 request.interceptors.request.use(function (config) {
     // 在发送请求之前做些什么
-   
+
     if(config.method=='post'){
         let data = config.data
         console.log(config.data,'config.data')
@@ -18,7 +18,7 @@ request.interceptors.request.use(function (config) {
         config.headers['Content-Type'] = 'appliction/x-www-form-urlencoded'
         console.log(config)
     }
-  
+
     return config;
   }, function (error) {
     // 对请求错误做些什么

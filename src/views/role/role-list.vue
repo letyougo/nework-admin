@@ -7,8 +7,7 @@
             <el-form-item>
                 <el-button-group>
                     <el-button type="primary" @click="fetch" size="mini">查询</el-button>
-                    <el-button @click="add_form.visible=true" size="mini">增加</el-button>
-                    <el-button @click="exports">导出</el-button>
+                    <el-button @click="post" size="mini">增加</el-button>
                 </el-button-group>
             </el-form-item>
         </el-form>
@@ -22,7 +21,14 @@
                   <el-input v-model="props.row.roleName" size="mini"/>
                 </el-form-item>
 
-               
+                <el-form-item label="是否应用">
+                  <el-radio-group v-model="props.row.available" size="mini">
+                    <el-radio-button label="1" size="mini" >是</el-radio-button>
+                    <el-radio-button label="0"  size="mini">否</el-radio-button>
+                  </el-radio-group>
+                </el-form-item>
+
+
 
                 <el-form-item label="权限">
                   <el-transfer :titles="['权限列表', '已有权限']" v-model="props.row.perm" :data="pers"></el-transfer>
@@ -45,7 +51,7 @@
             <el-table-column width="80px">
                 <template scope="scope">
                     <el-button-group size="mini" label="操作">
-                      <el-button size="mini" type="danger">删除</el-button>
+                      <el-button size="mini" type="danger" @click="remove(scope.row)">删除</el-button>
                     </el-button-group>
                 </template>
             </el-table-column>
@@ -80,29 +86,52 @@
     methods: {
 
       async fetch_perms() {
-   
+
         let res = await per.list();
         res = res.data.data.map(function(i){
-          i.key=i.id 
+          i.key=i.id
           i.label = i.name
           return i
         })
         this.pers = res;
-        
       },
+
+      async post(){
+        try{
+          let {value} = await this.$prompt('请输入角色名', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消'
+          })
+
+          let res = role.post({roleName:value,available:1})
+          this.fetch()
+        }catch(e){
+          this.$message({
+            type: 'info',
+            message: '取消输入'
+          });
+        }
+      },
+
       async fetch() {
         let res = await role.list()
         res=res.data.data.map(function(item){
           item.permissions = item.permissions || []
           item.perm = item.permissions.map(function(o){
-            return o.id 
+            return o.id
           })
           return item
         })
         this.list = res
       },
-      exports() {
-
+      async update(obj){
+        obj.permIds = obj.perm
+        await role.update(obj)
+        this.fetch()
+      },
+      async remove(obj){
+        await role.remove(obj)
+        this.fetch()
       }
     },
     mounted() {

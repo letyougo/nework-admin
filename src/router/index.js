@@ -21,6 +21,7 @@ import role_item from '../views/role/role-item'
 import per_list from '../views/per/per-list'
 import per_item from '../views/per/per-item'
 
+import log from '../views/log/log-list'
 Vue.use(Router)
 
 export default new Router({
@@ -81,16 +82,10 @@ export default new Router({
       component: template_item
     },
 
-
     {
       path: '/sysuser',
       name: 'sysuser-list',
       component: sysuser_list
-    },
-    {
-      path: '/sysuser_item',
-      name: 'sysuser-item',
-      component: sysuser_item
     },
 
     {
@@ -98,21 +93,17 @@ export default new Router({
       name: 'roles-list',
       component: role_list
     },
-    {
-      path: '/role_item',
-      name: 'role-item',
-      component: role_item
-    },
 
     {
       path: '/per',
       name: 'per-list',
       component: per_list
     },
+
     {
-      path: '/per_item',
-      name: 'per-item',
-      component: per_item
+      path: '/log',
+      name: 'log',
+      component: log
     },
 
   ]

@@ -1,8 +1,8 @@
 <template>
     <div class="service-list">
-        <h3>{{item.serviceTypeName}}</h3>
-        <el-form :inline="true" class="demo-form-inline" :loading="loading" size="mini">
-          
+
+        <el-form :inline="true" class="demo-form-inline"  size="mini">
+
             <el-form-item>
                 <el-select placeholder="选择国家" v-model="filter.n_value" @change="fetch_p">
                     <el-option v-for="item in filter.n_options" :value="item.districtId" :label="item.chinese">{{item.chinese}}</el-option>
@@ -10,10 +10,22 @@
                  <el-select placeholder="选择省/州" v-model="filter.p_value" @change="fetch_c">
                   <el-option v-for="item in filter.p_options" :value="item.districtId" :label="item.chinese">{{item.chinese}}</el-option>
                  </el-select>
-                  <el-select placeholder="选择城市" v-model="filter.c_value" @change="fetch(filter.c_value)" >
+                  <el-select placeholder="选择城市" v-model="filter.c_value"  >
                        <el-option v-for="item in filter.c_options" :value="item.districtId" :label="item.chinese">{{item.chinese}}</el-option>
                   </el-select>
             </el-form-item>
+
+            <el-form-item >
+              <el-button-group>
+                <el-button @click="fetch(filter.c_value)">查看</el-button>
+                <el-button @click="$router.push('/service/0')">一级类目</el-button>
+              </el-button-group>
+
+            </el-form-item>
+
+          <el-form-item >
+            <el-button @click="post">增加</el-button>
+          </el-form-item>
         </el-form>
 
         <el-table :data="list" size="mini" v-loading="loading">
@@ -56,8 +68,8 @@
             <el-table-column label="操作">
                 <template scope="scope">
                     <el-button-group size="mini">
-                        <el-button size="mini"   @click="$router.push('/service_item?id='+scope.row.serviceTypeId)">详情</el-button>
-                        <el-button size="mini" type="danger" @click="$router.push('id='+scope.row.serviceTypeId)">删除</el-button>
+                        <!--<el-button size="mini"   @click="$router.push('/service_item?id='+scope.row.serviceTypeId)">详情</el-button>-->
+                        <el-button size="mini" type="danger" @click="remove(scope.row)">删除</el-button>
                     </el-button-group>
 
                 </template>
@@ -76,11 +88,12 @@
 
   const district_list_url = "/district/listDistrictByParam"
   const update = '/service/updateService'
+  import api from '../api'
+  let {service } = api
   export default {
     name: 'service-list',
     data() {
       return {
-        loading: true,
         search: '',
         list: [],
         item:{},
@@ -112,20 +125,53 @@
         this.filter.c_options = res.data.data
       },
 
+      async post(){
+        if(!this.filter.c_value){
+          return this.$message.error('请选择城市')
+        }
+
+        try{
+          let {value} = await this.$prompt('请输入类目名', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消'
+          })
+
+          let obj = {
+            serviceTypeName:value,
+            districtId:this.filter.c_value,
+            parentId:this.$route.params.id,
+            level:this.$route.params.id == 0 ? 'f' : 's'
+          }
+
+          let res = await service.post(obj)
+          this.fetch()
+        }catch(e){
+          this.$message({
+            type: 'info',
+            message: '取消输入'
+          });
+        }
+      },
+
+      async remove(obj){
+        await service.remove(obj)
+        this.fetch(this.filter.c_value)
+      },
+
       async update(item){
-      
+
         var data = {
           weight:item.weight,
           serviceTypeName:item.serviceTypeName,
           serviceTypeId:parseInt(item.serviceTypeId)
         }
-      
+
         let res = await request.post(update,data)
-        this.fetch('')
+        this.fetch(this.filter.c_value)
       },
 
       async fetch(c) {
-        this.loading = true 
+        this.loading = true
         let id = this.$route.params.id
         let res = await request.get(list_url,{params:{parentId:id,isDeleted:false,districtId:c}})
         this.loading = false
@@ -136,21 +182,20 @@
         var id = this.$route.params.id
         let res = await request.get(detail_url,{params:{serviceTypeId:id}})
         let item = res.data.data
-        
+
         if(item.level == "s"){
-            alert(1)
             this.$message.error('没有下级类目')
             this.$router.back()
-            
+
         }else{
             this.item = item
         }
 
       },
-    
+
     reload(){
         this.fetch('')
-        // 
+        //
         this.fetch_n()
       }
     },
@@ -159,7 +204,7 @@
     },
      watch:{
       $route(){
-        this.fetch()
+        this.fetch(this.filter.c_value)
       }
     }
   }

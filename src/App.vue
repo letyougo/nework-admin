@@ -18,26 +18,37 @@
 
            <el-submenu index="1">
               <template slot="title">
-  
-                <span>系统管理</span>
+
+                <span>权限管理</span>
               </template>
               <el-menu-item-group>
-               
+
                 <el-menu-item index="/sysuser"  @click="$router.push('/sysuser')">系统用户</el-menu-item>
                 <el-menu-item index="/role" @click="$router.push('/role')">角色管理</el-menu-item>
                 <el-menu-item index="/per" @click="$router.push('/per')">权限管理</el-menu-item>
               </el-menu-item-group>
             </el-submenu>
-           
+
             <el-submenu index="2">
               <template slot="title">
-  
+
+                <span>用户管理</span>
+              </template>
+              <el-menu-item-group>
+                <el-menu-item index="/user" @click="$router.push('/user')">
+                  <span slot="title">用户管理</span>
+                </el-menu-item>
+
+              </el-menu-item-group>
+            </el-submenu>
+
+            <el-submenu index="3">
+              <template slot="title">
+
                 <span>业务管理</span>
               </template>
-              <el-menu-item-group>             
-                 <el-menu-item index="/user" @click="$router.push('/user')">
-                    <span slot="title">用户管理</span>
-                </el-menu-item>
+              <el-menu-item-group>
+
 
                 <el-menu-item index="/service" @click="$router.push('/service/0')">
                   <span slot="title">服务管理</span>
@@ -50,6 +61,65 @@
                 <el-menu-item index="/template" @click="$router.push('/template')">
                   <span slot="title">模板管理</span>
             </el-menu-item>
+              </el-menu-item-group>
+            </el-submenu>
+
+
+            <el-submenu index="4">
+              <template slot="title">
+
+                <span>订单管理</span>
+              </template>
+              <el-menu-item-group>
+                <el-menu-item index="/order" @click="$router.push('/user')">
+                  <span slot="title">订单列表</span>
+                </el-menu-item>
+
+
+              </el-menu-item-group>
+            </el-submenu>
+
+
+            <el-submenu index="5">
+              <template slot="title">
+
+                <span>订单管理</span>
+              </template>
+              <el-menu-item-group>
+                <el-menu-item index="/order" @click="$router.push('/user')">
+                  <span slot="title">订单列表</span>
+                </el-menu-item>
+
+
+              </el-menu-item-group>
+            </el-submenu>
+
+            <el-submenu index="6">
+              <template slot="title">
+
+                <span>财务管理</span>
+              </template>
+              <el-menu-item-group>
+                <el-menu-item index="/order" @click="$router.push('/user')">
+                  <span slot="title">交易记录</span>
+                </el-menu-item>
+
+                <el-menu-item index="/order" @click="$router.push('/user')">
+                  <span slot="title">体现审核</span>
+                </el-menu-item>
+              </el-menu-item-group>
+            </el-submenu>
+
+            <el-submenu index="7">
+              <template slot="title">
+
+                <span>系统设置</span>
+              </template>
+              <el-menu-item-group>
+                <el-menu-item index="/log" @click="$router.push('/log')">
+                  <span slot="title">系统日志</span>
+                </el-menu-item>
+
               </el-menu-item-group>
             </el-submenu>
 
@@ -137,13 +207,7 @@ div {
   height: 22px;
   text-align: left;
 }
-.el-menu-item i {
-  color: #ffffff;
-}
-i {
-  font-size: 16px;
-  color: #ffffff;
-}
+
 .content {
   padding: 20px;
   box-sizing: border-box;
