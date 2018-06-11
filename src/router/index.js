@@ -14,6 +14,7 @@ import template_item from '../views/template/template-item'
 
 import sysuser_list from '../views/sysuser/sysuser-list'
 import sysuser_item from '../views/sysuser/sysuser-item'
+import checkuser_list from '../views/user/check-list'
 
 import role_list from '../views/role/role-list'
 import role_item from '../views/role/role-item'
@@ -86,6 +87,12 @@ export default new Router({
       path: '/sysuser',
       name: 'sysuser-list',
       component: sysuser_list
+    },
+
+    {
+      path: '/checkuser',
+      name: 'sysuser-list',
+      component: checkuser_list
     },
 
     {

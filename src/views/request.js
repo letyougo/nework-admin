@@ -1,7 +1,7 @@
 import request from 'axios'
 import qs from 'qs'
 import { Form } from 'element-ui';
-request.defaults.baseURL = 'http://localhost:8080'
+request.defaults.baseURL = window.url
 import vue from 'vue'
 request.interceptors.request.use(function (config) {
     // 在发送请求之前做些什么

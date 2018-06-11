@@ -40,7 +40,7 @@ const url = {
 export default {
   //district
   'sysuser': {
-    list: () => request.get(url.sysuser.list),
+    list: (obj) => request.get(url.sysuser.list,{params:obj}),
   },
   'role': {
     list: () => request.get(url.role.list),

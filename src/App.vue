@@ -38,7 +38,9 @@
                 <el-menu-item index="/user" @click="$router.push('/user')">
                   <span slot="title">用户管理</span>
                 </el-menu-item>
-
+                <el-menu-item index="/checkuser" @click="$router.push('/checkuser')">
+                  <span slot="title">认证管理</span>
+                </el-menu-item>
               </el-menu-item-group>
             </el-submenu>
 
@@ -65,50 +67,38 @@
             </el-submenu>
 
 
-            <el-submenu index="4">
-              <template slot="title">
+            <!--<el-submenu index="4">-->
+              <!--<template slot="title">-->
 
-                <span>订单管理</span>
-              </template>
-              <el-menu-item-group>
-                <el-menu-item index="/order" @click="$router.push('/user')">
-                  <span slot="title">订单列表</span>
-                </el-menu-item>
-
-
-              </el-menu-item-group>
-            </el-submenu>
+                <!--<span>订单管理</span>-->
+              <!--</template>-->
+              <!--<el-menu-item-group>-->
+                <!--<el-menu-item index="/order" @click="$router.push('/user')">-->
+                  <!--<span slot="title">订单列表</span>-->
+                <!--</el-menu-item>-->
 
 
-            <el-submenu index="5">
-              <template slot="title">
-
-                <span>订单管理</span>
-              </template>
-              <el-menu-item-group>
-                <el-menu-item index="/order" @click="$router.push('/user')">
-                  <span slot="title">订单列表</span>
-                </el-menu-item>
+              <!--</el-menu-item-group>-->
+            <!--</el-submenu>-->
 
 
-              </el-menu-item-group>
-            </el-submenu>
 
-            <el-submenu index="6">
-              <template slot="title">
 
-                <span>财务管理</span>
-              </template>
-              <el-menu-item-group>
-                <el-menu-item index="/order" @click="$router.push('/user')">
-                  <span slot="title">交易记录</span>
-                </el-menu-item>
+            <!--<el-submenu index="6">-->
+              <!--<template slot="title">-->
 
-                <el-menu-item index="/order" @click="$router.push('/user')">
-                  <span slot="title">体现审核</span>
-                </el-menu-item>
-              </el-menu-item-group>
-            </el-submenu>
+                <!--<span>财务管理</span>-->
+              <!--</template>-->
+              <!--<el-menu-item-group>-->
+                <!--<el-menu-item index="/order" @click="$router.push('/user')">-->
+                  <!--<span slot="title">交易记录</span>-->
+                <!--</el-menu-item>-->
+
+                <!--<el-menu-item index="/order" @click="$router.push('/user')">-->
+                  <!--<span slot="title">体现审核</span>-->
+                <!--</el-menu-item>-->
+              <!--</el-menu-item-group>-->
+            <!--</el-submenu>-->
 
             <el-submenu index="7">
               <template slot="title">
